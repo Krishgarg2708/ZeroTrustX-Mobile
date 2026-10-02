@@ -47,6 +47,7 @@ fun DashboardScreen(
     onToggleLockdown: () -> Unit,
     onOpenAuditLogs: () -> Unit,
     onOpenInstallDialog: () -> Unit,
+    onOpenVercelDialog: () -> Unit = {},
     onSelectTab: (NavigationTab) -> Unit,
     onOpenPostureDetail: () -> Unit,
     onOpenDecisionVisualizer: (String) -> Unit,
@@ -634,6 +635,49 @@ fun DashboardScreen(
                         onClick = onOpenInstallDialog,
                         modifier = Modifier.weight(1f)
                     )
+                }
+
+                // Vercel Cloud Web Deployment Card
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable(onClick = onOpenVercelDialog)
+                        .testTag("launch_deploy_on_vercel"),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = CardDefaults.cardColors(containerColor = CyberSurfaceElevated),
+                    border = BorderStroke(1.dp, Color.White.copy(alpha = 0.35f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(14.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color.White),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("▲", color = Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Black)
+                        }
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text("Deploy on Vercel", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = CyberTextPrimary)
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Box(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(4.dp))
+                                        .background(Color.White.copy(alpha = 0.15f))
+                                        .padding(horizontal = 5.dp, vertical = 1.dp)
+                                ) {
+                                    Text("VERCEL.JSON READY", fontSize = 8.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                                }
+                            }
+                            Text("Host Web Command Center globally on Vercel in 60s →", fontSize = 11.sp, color = CyberTextSecondary)
+                        }
+                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = Color.White)
+                    }
                 }
             }
         }

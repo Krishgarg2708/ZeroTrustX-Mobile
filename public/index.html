@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZeroTrustX Mobile — Enterprise Zero Trust Platform</title>
+  <meta name="description" content="Zero Trust Network Access (ZTNA) Enterprise Security Platform. Verify Every Access. Trust Nothing by Default.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="logo-shield">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">ZeroTrustX</span>
+          <span class="brand-tag">MOBILE & CLOUD</span>
+        </div>
+      </div>
+
+      <div class="nav-badges">
+        <span class="badge badge-pulse">
+          <span class="pulse-dot"></span> ENCLAVES ACTIVE
+        </span>
+        <span class="badge badge-demo">DEMO MODE</span>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer" class="btn btn-vercel">
+          <svg viewBox="0 0 1155 1000" width="14" height="12" fill="currentColor">
+            <path d="m577.3 0 577.4 1000H0z"/>
+          </svg>
+          Deploy to Vercel
+        </a>
+        <a href="#install" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Install Android APK
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Live Simulator & Command Center -->
+  <main class="main-content">
+    <section class="hero-section">
+      <div class="hero-left">
+        <div class="sub-headline">
+          <span class="shield-icon">🛡️</span> VERIFY EVERY ACCESS. TRUST NOTHING BY DEFAULT.
+        </div>
+        <h1 class="hero-title">
+          Enterprise <span class="gradient-text">Zero Trust</span><br>Command Center
+        </h1>
+        <p class="hero-subtitle">
+          Real-time continuous identity verification, hardware enclave telemetry, explainable access decisions, and dynamic risk enforcement on mobile and cloud edge.
+        </p>
+
+        <!-- The 3 Core Answers Callout -->
+        <div class="card answers-card">
+          <div class="answers-header">
+            <span class="tag-label">CORE TELEMETRY ADVISORY</span>
+            <span class="status-live">POSTURE: 87/100 (SECURE)</span>
+          </div>
+
+          <div class="answer-item">
+            <div class="answer-icon icon-secure">✓</div>
+            <div>
+              <div class="answer-q">1. Am I secure?</div>
+              <div class="answer-a">YES • Score 87/100. FIDO2 MFA active, TPM 2.0 compliant hardware, and mutual TLS 1.3 verified across 4 enterprise enclaves.</div>
+            </div>
+          </div>
+
+          <div class="answer-item">
+            <div class="answer-icon icon-warn">!</div>
+            <div>
+              <div class="answer-q">2. What requires my attention?</div>
+              <div class="answer-a">1 Pending Access Decision (PostgreSQL DB) • 2 Security Alerts • 3 Actionable Recommendations.</div>
+            </div>
+          </div>
+
+          <div class="answer-item">
+            <div class="answer-icon icon-danger">?</div>
+            <div>
+              <div class="answer-q">3. Why is something considered risky?</div>
+              <div class="answer-a">Mumbai remote session detected geographic variance (>500km from baseline) requesting CONFIDENTIAL asset. Step-up required.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continuous Trust Interactive Demonstration -->
+        <div class="card continuous-card">
+          <div class="card-head">
+            <span class="tag-label">CONTINUOUS TRUST ENGINE</span>
+            <span id="trust-state-pill" class="badge badge-normal">ACTIVE TELEMETRY</span>
+          </div>
+
+          <div class="trust-meter-row">
+            <div class="trust-metric">
+              <span class="metric-caption">INITIAL SCORE</span>
+              <span class="metric-val">92</span>
+            </div>
+            <div class="trust-arrow" id="trust-arrow">➔</div>
+            <div class="trust-metric">
+              <span class="metric-caption">CURRENT SCORE</span>
+              <span class="metric-val highlight" id="current-score-text">74</span>
+            </div>
+          </div>
+
+          <div class="trust-desc" id="trust-condition-text">
+            Context Shift: Device network switched from corporate SD-WAN to untrusted public Wi-Fi.
+          </div>
+
+          <div id="trust-alert-box" class="trust-alert">
+            <span>🚨 STEP-UP AUTHENTICATION REQUIRED</span>
+            <button class="btn btn-sm btn-cyan" onclick="satisfyTrust()">Verify Biometrics</button>
+          </div>
+
+          <div class="simulation-actions">
+            <span class="action-hint">Test Dynamic Drift:</span>
+            <button class="btn btn-xs" onclick="simulateDrift('Unsecured Hotel Wi-Fi connected', 74, true)">Wi-Fi Shift (92→74)</button>
+            <button class="btn btn-xs" onclick="simulateDrift('Geo Anomaly: Delhi to Mumbai (1,150km)', 58, true)">Geo Drift (92→58)</button>
+            <button class="btn btn-xs" onclick="simulateDrift('Normal corporate baseline restored', 92, false)">Reset (92)</button>
+          </div>
+        </div>
+
+        <!-- Domain Security Scores -->
+        <div class="domain-scores-grid">
+          <div class="domain-box">
+            <span class="domain-label">Identity</span>
+            <span class="domain-val blue">92</span>
+            <span class="domain-sub">FIDO2 Active</span>
+          </div>
+          <div class="domain-box">
+            <span class="domain-label">Device</span>
+            <span class="domain-val cyan">88</span>
+            <span class="domain-sub">TPM 2.0 Compliant</span>
+          </div>
+          <div class="domain-box">
+            <span class="domain-label">Network</span>
+            <span class="domain-val purple">84</span>
+            <span class="domain-sub">mTLS Monitored</span>
+          </div>
+          <div class="domain-box">
+            <span class="domain-label">Application</span>
+            <span class="domain-val green">85</span>
+            <span class="domain-sub">Least Privilege</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Right: Interactive Mobile Smartphone Simulator -->
+      <div class="hero-right">
+        <div class="device-frame">
+          <div class="device-speaker"></div>
+          <div class="device-screen">
+            <!-- Mobile App Bar -->
+            <div class="mobile-topbar">
+              <span class="clock" id="live-clock">09:41</span>
+              <span class="icons">5G 📶 100% 🔋</span>
+            </div>
+
+            <div class="mobile-header">
+              <div>
+                <div class="mobile-greeting">Good morning, Alex</div>
+                <div class="mobile-role">Security Administrator • Tier 3</div>
+              </div>
+              <div class="mobile-badge">DEMO</div>
+            </div>
+
+            <!-- Mobile Active View Container -->
+            <div class="mobile-scrollable" id="mobile-view-container">
+              <!-- Rendered dynamically by JS -->
+            </div>
+
+            <!-- Mobile Bottom Navigation Bar -->
+            <div class="mobile-bottombar">
+              <button class="nav-tab active" onclick="switchTab('dashboard')">
+                <span class="tab-icon">📊</span>
+                <span class="tab-text">Dashboard</span>
+              </button>
+              <button class="nav-tab" onclick="switchTab('flow')">
+                <span class="tab-icon">⚡</span>
+                <span class="tab-text">Flow</span>
+              </button>
+              <button class="nav-tab" onclick="switchTab('policy')">
+                <span class="tab-icon">⚖️</span>
+                <span class="tab-text">Policy</span>
+              </button>
+              <button class="nav-tab" onclick="switchTab('devices')">
+                <span class="tab-icon">📱</span>
+                <span class="tab-text">Devices</span>
+              </button>
+              <button class="nav-tab" onclick="switchTab('alerts')">
+                <span class="tab-icon">🔔</span>
+                <span class="tab-text">Alerts</span>
+              </button>
+            </div>
+          </div>
+          <div class="device-home-bar"></div>
+        </div>
+        <div class="simulator-caption">Interactive Android Mobile Prototype Live Simulation</div>
+      </div>
+    </section>
+
+    <!-- Signature Zero Trust Flow Showcase (Section 12) -->
+    <section class="section flow-section">
+      <div class="section-header">
+        <span class="tag-label">SIGNATURE ARCHITECTURE CENTERPIECE</span>
+        <h2>Signature Zero Trust Verification Flow</h2>
+        <p class="section-desc">Every request traverses all 9 cryptographic verification stages before an ephemeral token is minted.</p>
+      </div>
+
+      <div class="flow-pipeline" id="signature-flow-container">
+        <!-- 9 Nodes -->
+        <div class="flow-node" onclick="inspectNode('identity')">
+          <div class="node-num">1</div>
+          <div class="node-title">IDENTITY</div>
+          <div class="node-status green">JWT / OIDC Verified</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('mfa')">
+          <div class="node-num">2</div>
+          <div class="node-title">MFA</div>
+          <div class="node-status green">FIDO2 Hardware Key</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('device')">
+          <div class="node-num">3</div>
+          <div class="node-title">DEVICE</div>
+          <div class="node-status green">TPM 2.0 / Encrypted</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('location')">
+          <div class="node-num">4</div>
+          <div class="node-title">LOCATION</div>
+          <div class="node-status amber">Geo Delta Analyzed</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('network')">
+          <div class="node-num">5</div>
+          <div class="node-title">NETWORK</div>
+          <div class="node-status green">Mutual TLS 1.3</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('resource')">
+          <div class="node-num">6</div>
+          <div class="node-title">RESOURCE</div>
+          <div class="node-status purple">CONFIDENTIAL DB</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('risk')">
+          <div class="node-num">7</div>
+          <div class="node-title">RISK ENGINE</div>
+          <div class="node-status cyan">Score: 28/100</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node" onclick="inspectNode('policy')">
+          <div class="node-num">8</div>
+          <div class="node-title">POLICY</div>
+          <div class="node-status green">Rule #ZT-402 Pass</div>
+        </div>
+        <div class="flow-connector">➔</div>
+
+        <div class="flow-node highlight-node" onclick="inspectNode('decision')">
+          <div class="node-num">9</div>
+          <div class="node-title">DECISION</div>
+          <div class="node-status green">ALLOW (30m TTL)</div>
+        </div>
+      </div>
+
+      <div class="node-detail-card card" id="node-detail-card">
+        <div class="node-detail-title" id="node-detail-title">Selected Stage: 1. IDENTITY VERIFICATION</div>
+        <div class="node-detail-desc" id="node-detail-desc">Cryptographic JWT issued by Okta/Azure AD enterprise enclave. Nonce valid for 30 minutes. Phishing-resistant credentials verified explicitly.</div>
+        <div class="node-detail-rule" id="node-detail-rule">Zero Trust Principle: "Verify identity explicitly. Never trust standing sessions."</div>
+      </div>
+    </section>
+
+    <!-- Deploy on Vercel & Install Android APK Section -->
+    <section class="section deploy-section" id="install">
+      <div class="section-header">
+        <span class="tag-label">DEPLOYMENT & DISTRIBUTION</span>
+        <h2>Deploy on Vercel in 60 Seconds</h2>
+        <p class="section-desc">Host this ZeroTrustX web command center globally on Vercel while distributing the native APK to mobile devices.</p>
+      </div>
+
+      <div class="deploy-grid">
+        <!-- Vercel Deployment Card -->
+        <div class="card deploy-card">
+          <div class="card-icon vercel-icon">▲</div>
+          <h3>1. Deploy to Vercel</h3>
+          <p>This repository is configured with <code>vercel.json</code>. You can deploy it instantly with zero configuration.</p>
+          
+          <div class="steps-list">
+            <div class="step-row">
+              <span class="step-num">1</span>
+              <span>Push this project to a <strong>GitHub Repository</strong>.</span>
+            </div>
+            <div class="step-row">
+              <span class="step-num">2</span>
+              <span>Log in to <a href="https://vercel.com" target="_blank" class="link">Vercel.com</a> and click <strong>Add New Project</strong>.</span>
+            </div>
+            <div class="step-row">
+              <span class="step-num">3</span>
+              <span>Import your GitHub repository and click <strong>Deploy</strong>. Vercel automatically deploys the public command center!</span>
+            </div>
+          </div>
+
+          <div class="cli-box">
+            <span class="cli-label">OR USING VERCEL CLI:</span>
+            <code>npm i -g vercel && vercel deploy --prod</code>
+          </div>
+
+          <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer" class="btn btn-vercel-lg">
+            <svg viewBox="0 0 1155 1000" width="16" height="14" fill="currentColor">
+              <path d="m577.3 0 577.4 1000H0z"/>
+            </svg>
+            Deploy Repository to Vercel
+          </a>
+        </div>
+
+        <!-- Android APK Mobile Installation Card -->
+        <div class="card deploy-card">
+          <div class="card-icon android-icon">🤖</div>
+          <h3>2. Install on Mobile Phone (APK)</h3>
+          <p>Install the native Android app directly onto any physical Android device or enterprise emulator.</p>
+
+          <div class="steps-list">
+            <div class="step-row">
+              <span class="step-num">1</span>
+              <span>In AI Studio settings, click <strong>Download Project ZIP</strong> or <strong>Generate APK</strong>.</span>
+            </div>
+            <div class="step-row">
+              <span class="step-num">2</span>
+              <span>Transfer the generated <code>app-debug.apk</code> to your Android phone via USB, Drive, or messaging.</span>
+            </div>
+            <div class="step-row">
+              <span class="step-num">3</span>
+              <span>Tap the APK file on your device and select <strong>Install</strong> (Allow from this source).</span>
+            </div>
+          </div>
+
+          <div class="cli-box">
+            <span class="cli-label">OR VIA ADB COMMAND LINE:</span>
+            <code>adb install app/build/outputs/apk/debug/app-debug.apk</code>
+          </div>
+
+          <button class="btn btn-primary-lg" onclick="alert('In AI Studio, use the Settings menu in the top right to download the project or export APK directly!')">
+            Generate & Download Android APK
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="brand-title">ZeroTrustX Mobile</span>
+        <span class="footer-copy">Enterprise Zero Trust Network Access (ZTNA) Architecture. Certified NIST SP 800-207 Aligned.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#install">Deploy on Vercel</a>
+        <a href="#install">Install APK</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

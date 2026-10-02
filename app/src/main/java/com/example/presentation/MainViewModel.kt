@@ -37,6 +37,7 @@ data class UiState(
     val showRadarDialog: Boolean = false,
     val showAuditLogsDialog: Boolean = false,
     val showInstallDialog: Boolean = false,
+    val showVercelDialog: Boolean = false,
     val showBiometricScanDialog: Boolean = false,
     val showFlowScreen: Boolean = false,
     val showPolicySimulator: Boolean = false,
@@ -179,6 +180,8 @@ class MainViewModel(
                 showPostureDetail = false,
                 showRadarDialog = false,
                 showAuditLogsDialog = false,
+                showInstallDialog = false,
+                showVercelDialog = false,
                 showFlowScreen = false,
                 showPolicySimulator = false,
                 showAnalyticsScreen = false,
@@ -323,6 +326,14 @@ class MainViewModel(
         _uiState.update { it.copy(showInstallDialog = false) }
     }
 
+    fun openVercelDialog() {
+        _uiState.update { it.copy(showVercelDialog = true) }
+    }
+
+    fun closeVercelDialog() {
+        _uiState.update { it.copy(showVercelDialog = false) }
+    }
+
     fun setAuditCategoryFilter(category: AuditCategory?) {
         _uiState.update { it.copy(auditCategoryFilter = category) }
     }
@@ -436,6 +447,7 @@ class MainViewModel(
                 showRadarDialog = false,
                 showAuditLogsDialog = false,
                 showInstallDialog = false,
+                showVercelDialog = false,
                 showFlowScreen = false,
                 showPolicySimulator = false,
                 showAnalyticsScreen = false,

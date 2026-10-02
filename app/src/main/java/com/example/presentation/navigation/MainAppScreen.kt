@@ -35,6 +35,7 @@ import com.example.presentation.components.AuditEventCard
 import com.example.presentation.components.BiometricScanDialog
 import com.example.presentation.components.ExplainableDecisionSheet
 import com.example.presentation.components.InstallMobileDialog
+import com.example.presentation.components.VercelDeployDialog
 import com.example.presentation.dashboard.DashboardScreen
 import com.example.presentation.decision.AccessDecisionScreen
 import com.example.presentation.devices.DevicesScreen
@@ -86,6 +87,7 @@ fun MainAppScreen(
             uiState.showPostureDetail ||
             uiState.showAuditLogsDialog ||
             uiState.showInstallDialog ||
+            uiState.showVercelDialog ||
             uiState.showFlowScreen ||
             uiState.showPolicySimulator ||
             uiState.showAnalyticsScreen ||
@@ -108,6 +110,7 @@ fun MainAppScreen(
             uiState.showPostureDetail -> viewModel.closePostureDetail()
             uiState.showAuditLogsDialog -> viewModel.closeAuditLogs()
             uiState.showInstallDialog -> viewModel.closeInstallDialog()
+            uiState.showVercelDialog -> viewModel.closeVercelDialog()
             else -> viewModel.selectTab(NavigationTab.DASHBOARD)
         }
     }
@@ -293,6 +296,7 @@ fun MainAppScreen(
                                 onToggleLockdown = { viewModel.toggleLockdown() },
                                 onOpenAuditLogs = { viewModel.openAuditLogs() },
                                 onOpenInstallDialog = { viewModel.openInstallDialog() },
+                                onOpenVercelDialog = { viewModel.openVercelDialog() },
                                 onSelectTab = { viewModel.selectTab(it) },
                                 onOpenPostureDetail = { viewModel.openPostureDetail() },
                                 onOpenDecisionVisualizer = { viewModel.openDecisionVisualizer(it) },
@@ -365,6 +369,7 @@ fun MainAppScreen(
                                 activeSessionsCount = sessions.size,
                                 onUpdateSettings = { viewModel.updateSettings(it) },
                                 onOpenInstallDialog = { viewModel.openInstallDialog() },
+                                onOpenVercelDialog = { viewModel.openVercelDialog() },
                                 onResetDemoData = { viewModel.resetDemoData() },
                                 onSignOut = onSignOut
                             )
@@ -396,6 +401,13 @@ fun MainAppScreen(
                     onEnrollCurrentDevice = {
                         viewModel.completeDeviceTrust(true)
                     }
+                )
+            }
+
+            // Vercel Cloud Web Deployment Dialog
+            if (uiState.showVercelDialog) {
+                VercelDeployDialog(
+                    onDismiss = { viewModel.closeVercelDialog() }
                 )
             }
 

@@ -31,6 +31,7 @@ fun ProfileScreen(
     activeSessionsCount: Int,
     onUpdateSettings: (UserSecuritySettings) -> Unit,
     onOpenInstallDialog: () -> Unit,
+    onOpenVercelDialog: () -> Unit = {},
     onResetDemoData: () -> Unit,
     onSignOut: () -> Unit,
     modifier: Modifier = Modifier
@@ -271,6 +272,36 @@ fun ProfileScreen(
                             Column {
                                 Text("Install on Mobile Phone", fontSize = 13.sp, color = CyberTextPrimary, fontWeight = FontWeight.Medium)
                                 Text("Generate APK & deploy to real Android device", fontSize = 11.sp, color = CyberCyan)
+                            }
+                        }
+                        Icon(Icons.Default.ChevronRight, contentDescription = null, tint = CyberTextMuted)
+                    }
+
+                    HorizontalDivider(color = CyberBorderSubtle)
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onOpenVercelDialog() }
+                            .padding(vertical = 8.dp)
+                            .testTag("profile_deploy_vercel_button"),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .clip(CircleShape)
+                                    .background(Color.White),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("▲", color = Color.Black, fontSize = 11.sp, fontWeight = FontWeight.Black)
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Text("Deploy on Vercel", fontSize = 13.sp, color = CyberTextPrimary, fontWeight = FontWeight.Medium)
+                                Text("Zero-config global web deployment (vercel.json)", fontSize = 11.sp, color = Color.White)
                             }
                         }
                         Icon(Icons.Default.ChevronRight, contentDescription = null, tint = CyberTextMuted)
